@@ -1,9 +1,24 @@
-import { Phone, Mail, Clock, Menu, X } from "lucide-react";
+import { Phone, Mail, Clock, Menu, X, User } from "lucide-react";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
+import { useAuth } from "@/hooks/useAuth";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const { user } = useAuth();
+
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/vision", label: "Vision" },
+    { href: "/projects", label: "Projects" },
+    { href: "/reviews", label: "Reviews" },
+    { href: "/contact", label: "Contact" },
+  ];
+
+  const isActive = (href: string) => location.pathname === href;
 
   return (
     <header className="w-full">
@@ -30,7 +45,7 @@ const Header = () => {
       {/* Main navigation */}
       <nav className="bg-card shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <a href="#" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <div className="w-12 h-12 bg-gradient-gold rounded-lg flex items-center justify-center shadow-gold">
               <span className="text-primary font-display font-bold text-xl">SN</span>
             </div>
@@ -40,17 +55,33 @@ const Header = () => {
               </h1>
               <p className="text-xs text-muted-foreground tracking-wider uppercase">Developers</p>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#home" className="text-foreground hover:text-gold font-medium transition-colors">Home</a>
-            <a href="#about" className="text-foreground hover:text-gold font-medium transition-colors">About</a>
-            <a href="#vision" className="text-foreground hover:text-gold font-medium transition-colors">Vision</a>
-            <a href="#contact" className="text-foreground hover:text-gold font-medium transition-colors">Contact</a>
-            <Button variant="hero" size="lg">
-              Get in Touch
-            </Button>
+          <div className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className={`font-medium transition-colors ${
+                  isActive(link.href) ? "text-gold" : "text-foreground hover:text-gold"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link to={user ? "/admin" : "/auth"}>
+              <Button variant="hero" size="lg">
+                {user ? (
+                  <>
+                    <User className="w-4 h-4 mr-2" />
+                    Dashboard
+                  </>
+                ) : (
+                  "Login"
+                )}
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -66,13 +97,23 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden bg-card border-t border-border animate-fade-in">
             <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
-              <a href="#home" className="text-foreground hover:text-gold font-medium py-2" onClick={() => setIsMenuOpen(false)}>Home</a>
-              <a href="#about" className="text-foreground hover:text-gold font-medium py-2" onClick={() => setIsMenuOpen(false)}>About</a>
-              <a href="#vision" className="text-foreground hover:text-gold font-medium py-2" onClick={() => setIsMenuOpen(false)}>Vision</a>
-              <a href="#contact" className="text-foreground hover:text-gold font-medium py-2" onClick={() => setIsMenuOpen(false)}>Contact</a>
-              <Button variant="hero" className="w-full">
-                Get in Touch
-              </Button>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={`font-medium py-2 ${
+                    isActive(link.href) ? "text-gold" : "text-foreground hover:text-gold"
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link to={user ? "/admin" : "/auth"} onClick={() => setIsMenuOpen(false)}>
+                <Button variant="hero" className="w-full">
+                  {user ? "Dashboard" : "Login"}
+                </Button>
+              </Link>
             </div>
           </div>
         )}
