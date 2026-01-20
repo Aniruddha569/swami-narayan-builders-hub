@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -35,16 +36,22 @@ const Footer = () => {
             <h4 className="font-semibold text-lg mb-6">Quick Links</h4>
             <ul className="space-y-3">
               <li>
-                <a href="#home" className="text-cream/70 hover:text-gold transition-colors">Home</a>
+                <Link to="/" className="text-cream/70 hover:text-gold transition-colors">Home</Link>
               </li>
               <li>
-                <a href="#about" className="text-cream/70 hover:text-gold transition-colors">About Us</a>
+                <Link to="/about" className="text-cream/70 hover:text-gold transition-colors">About Us</Link>
               </li>
               <li>
-                <a href="#vision" className="text-cream/70 hover:text-gold transition-colors">Vision & Mission</a>
+                <Link to="/vision" className="text-cream/70 hover:text-gold transition-colors">Vision & Mission</Link>
               </li>
               <li>
-                <a href="#contact" className="text-cream/70 hover:text-gold transition-colors">Contact</a>
+                <Link to="/projects" className="text-cream/70 hover:text-gold transition-colors">Projects</Link>
+              </li>
+              <li>
+                <Link to="/reviews" className="text-cream/70 hover:text-gold transition-colors">Reviews</Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-cream/70 hover:text-gold transition-colors">Contact</Link>
               </li>
             </ul>
           </div>

@@ -1,10 +1,11 @@
 import { Button } from "./ui/button";
 import { ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-building.jpg";
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -32,21 +33,25 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: '0.4s' }}>
-            <Button variant="hero" size="xl">
-              Explore Our Projects
-            </Button>
-            <Button variant="heroOutline" size="xl">
-              Contact Us
-            </Button>
+            <Link to="/projects">
+              <Button variant="hero" size="xl">
+                Explore Our Projects
+              </Button>
+            </Link>
+            <Link to="/contact">
+              <Button variant="heroOutline" size="xl">
+                Contact Us
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
       
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <a href="#about" className="text-cream/60 hover:text-cream transition-colors">
+        <Link to="/about" className="text-cream/60 hover:text-cream transition-colors">
           <ChevronDown className="w-8 h-8" />
-        </a>
+        </Link>
       </div>
     </section>
   );
