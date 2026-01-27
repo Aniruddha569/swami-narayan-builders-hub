@@ -14,8 +14,10 @@ import {
   Check, 
   X,
   Upload,
-  Home
+  Home,
+  LayoutGrid
 } from "lucide-react";
+import FlatManagement from "@/components/admin/FlatManagement";
 
 interface Project {
   id: string;
@@ -47,7 +49,7 @@ interface Enquiry {
   created_at: string;
 }
 
-type Tab = "projects" | "reviews" | "enquiries";
+type Tab = "projects" | "flats" | "reviews" | "enquiries";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -227,7 +229,7 @@ const Admin = () => {
 
       <div className="container mx-auto px-4 py-8">
         {/* Tabs */}
-        <div className="flex gap-4 mb-8 border-b border-border">
+        <div className="flex flex-wrap gap-2 sm:gap-4 mb-8 border-b border-border">
           <button
             onClick={() => setActiveTab("projects")}
             className={`flex items-center gap-2 pb-4 px-2 border-b-2 transition-colors ${
@@ -235,7 +237,16 @@ const Admin = () => {
             }`}
           >
             <Building className="w-5 h-5" />
-            <span>Projects</span>
+            <span className="hidden sm:inline">Projects</span>
+          </button>
+          <button
+            onClick={() => setActiveTab("flats")}
+            className={`flex items-center gap-2 pb-4 px-2 border-b-2 transition-colors ${
+              activeTab === "flats" ? "border-gold text-gold" : "border-transparent text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <LayoutGrid className="w-5 h-5" />
+            <span className="hidden sm:inline">Flats</span>
           </button>
           <button
             onClick={() => setActiveTab("reviews")}
@@ -244,7 +255,7 @@ const Admin = () => {
             }`}
           >
             <MessageSquare className="w-5 h-5" />
-            <span>Reviews</span>
+            <span className="hidden sm:inline">Reviews</span>
             {reviews.filter(r => !r.is_approved).length > 0 && (
               <span className="bg-gold text-primary text-xs rounded-full px-2 py-0.5">
                 {reviews.filter(r => !r.is_approved).length}
@@ -258,7 +269,7 @@ const Admin = () => {
             }`}
           >
             <Mail className="w-5 h-5" />
-            <span>Enquiries</span>
+            <span className="hidden sm:inline">Enquiries</span>
             {enquiries.filter(e => !e.is_read).length > 0 && (
               <span className="bg-gold text-primary text-xs rounded-full px-2 py-0.5">
                 {enquiries.filter(e => !e.is_read).length}
@@ -382,6 +393,9 @@ const Admin = () => {
             )}
           </div>
         )}
+
+        {/* Flats Tab */}
+        {activeTab === "flats" && <FlatManagement />}
 
         {/* Reviews Tab */}
         {activeTab === "reviews" && (

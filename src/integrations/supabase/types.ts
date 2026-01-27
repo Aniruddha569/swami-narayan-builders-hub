@@ -44,6 +44,56 @@ export type Database = {
         }
         Relationships: []
       }
+      flats: {
+        Row: {
+          amenities: string[] | null
+          carpet_area: number | null
+          configuration: string
+          created_at: string
+          flat_number: string
+          floor_number: number | null
+          id: string
+          price: number | null
+          project_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amenities?: string[] | null
+          carpet_area?: number | null
+          configuration: string
+          created_at?: string
+          flat_number: string
+          floor_number?: number | null
+          id?: string
+          price?: number | null
+          project_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amenities?: string[] | null
+          carpet_area?: number | null
+          configuration?: string
+          created_at?: string
+          flat_number?: string
+          floor_number?: number | null
+          id?: string
+          price?: number | null
+          project_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "flats_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       projects: {
         Row: {
           created_at: string
