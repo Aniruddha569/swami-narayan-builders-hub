@@ -1,5 +1,10 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import Stats from "@/components/Stats";
+import FeaturedProjects from "@/components/FeaturedProjects";
+import Gallery from "@/components/Gallery";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
 const Home = () => {
@@ -8,6 +13,11 @@ const Home = () => {
       <Header />
       <main>
         <Hero />
+        <Stats />
+        <FeaturedProjects />
+        <Gallery />
+        <WhyChooseUs />
+        <CTASection />
       </main>
       <Footer />
     </div>
