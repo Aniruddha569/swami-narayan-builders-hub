@@ -1,4 +1,5 @@
 import { Phone, Mail, Clock, Menu, X, User } from "lucide-react";
+import logo from "@/assets/logo.png";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
@@ -46,8 +47,8 @@ const Header = () => {
       <nav className="bg-card shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-gold rounded-lg flex items-center justify-center shadow-gold">
-              <span className="text-primary font-display font-bold text-xl">SN</span>
+            <div className="w-12 h-12 rounded-lg overflow-hidden shadow-gold">
+              <img src={logo} alt="Swami Narayan Logo" className="w-full h-full object-cover" />
             </div>
             <div>
               <h1 className="font-display font-bold text-lg text-foreground leading-tight">
