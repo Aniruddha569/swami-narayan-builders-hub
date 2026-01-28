@@ -1,5 +1,6 @@
 import { MapPin, Phone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,8 +12,8 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-gold rounded-lg flex items-center justify-center shadow-gold">
-                <span className="text-primary font-display font-bold text-xl">SN</span>
+              <div className="w-12 h-12 rounded-lg overflow-hidden shadow-gold">
+                <img src={logo} alt="Swami Narayan Logo" className="w-full h-full object-cover" />
               </div>
               <div>
                 <h3 className="font-display font-bold text-xl text-cream">
