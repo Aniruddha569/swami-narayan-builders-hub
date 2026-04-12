@@ -1,12 +1,16 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import NewsTicker from "@/components/NewsTicker";
+import BuilderIntro from "@/components/BuilderIntro";
 import PlotPromotion from "@/components/PlotPromotion";
 import Stats from "@/components/Stats";
-import Gallery from "@/components/Gallery";
+import EMICalculator from "@/components/EMICalculator";
 import OngoingProjects from "@/components/OngoingProjects";
+import Gallery from "@/components/Gallery";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
+import AIChatbot from "@/components/AIChatbot";
 
 const Home = () => {
   return (
@@ -14,14 +18,18 @@ const Home = () => {
       <Header />
       <main>
         <Hero />
+        <NewsTicker />
+        <BuilderIntro />
         <PlotPromotion />
         <Stats />
+        <EMICalculator />
         <OngoingProjects />
         <Gallery />
         <WhyChooseUs />
         <CTASection />
       </main>
       <Footer />
+      <AIChatbot />
     </div>
   );
 };
