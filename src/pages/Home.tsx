@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import PlotPromotion from "@/components/PlotPromotion";
 import Stats from "@/components/Stats";
 import Gallery from "@/components/Gallery";
 import OngoingProjects from "@/components/OngoingProjects";
@@ -13,6 +14,7 @@ const Home = () => {
       <Header />
       <main>
         <Hero />
+        <PlotPromotion />
         <Stats />
         <OngoingProjects />
         <Gallery />
