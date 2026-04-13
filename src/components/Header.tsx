@@ -4,19 +4,23 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useAuth } from "@/hooks/useAuth";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const { user } = useAuth();
+  const { t } = useLanguage();
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/vision", label: "Vision" },
-    { href: "/projects", label: "Projects" },
-    { href: "/reviews", label: "Reviews" },
-    { href: "/contact", label: "Contact" },
+    { href: "/", label: t("nav.home") },
+    { href: "/about", label: t("nav.about") },
+    { href: "/vision", label: t("nav.vision") },
+    { href: "/projects", label: t("nav.projects") },
+    { href: "/reviews", label: t("nav.reviews") },
+    { href: "/emi-calculator", label: t("nav.emi") },
+    { href: "/contact", label: t("nav.contact") },
   ];
 
   const isActive = (href: string) => location.pathname === href;
@@ -36,9 +40,12 @@ const Header = () => {
               <span className="hidden sm:inline">swaminarayanbuilders@gmail.com</span>
             </a>
           </div>
-          <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4" />
-            <span>Mon - Sat: 9:00 AM - 6:00 PM</span>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              <span className="hidden sm:inline">Mon - Sat: 9:00 AM - 6:00 PM</span>
+            </div>
+            <LanguageSwitcher />
           </div>
         </div>
       </div>
@@ -59,12 +66,12 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-5">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className={`font-medium transition-colors ${
+                className={`font-medium text-sm transition-colors ${
                   isActive(link.href) ? "text-gold" : "text-foreground hover:text-gold"
                 }`}
               >
@@ -72,31 +79,34 @@ const Header = () => {
               </Link>
             ))}
             <Link to={user ? "/admin" : "/auth"}>
-              <Button variant="hero" size="lg">
+              <Button variant="hero" size="sm">
                 {user ? (
                   <>
-                    <User className="w-4 h-4 mr-2" />
-                    Dashboard
+                    <User className="w-4 h-4 mr-1" />
+                    {t("nav.dashboard")}
                   </>
                 ) : (
-                  "Login"
+                  t("nav.login")
                 )}
               </Button>
             </Link>
           </div>
 
           {/* Mobile menu button */}
-          <button 
-            className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <div className="flex lg:hidden items-center gap-2">
+            <LanguageSwitcher />
+            <button
+              className="p-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden bg-card border-t border-border animate-fade-in">
+          <div className="lg:hidden bg-card border-t border-border animate-fade-in">
             <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <Link
@@ -112,7 +122,7 @@ const Header = () => {
               ))}
               <Link to={user ? "/admin" : "/auth"} onClick={() => setIsMenuOpen(false)}>
                 <Button variant="hero" className="w-full">
-                  {user ? "Dashboard" : "Login"}
+                  {user ? t("nav.dashboard") : t("nav.login")}
                 </Button>
               </Link>
             </div>
